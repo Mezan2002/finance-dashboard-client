@@ -1,4 +1,4 @@
-import Insights from "@/components/Insights";
+import Insights from "@/components/features/insights";
 
 const InsightsPage = () => <Insights />;
 
