@@ -1,6 +1,5 @@
 import Header from "@/components/shared/Header";
 import Sidebar from "@/components/shared/Sidebar";
-import ThemeProvider from "@/providers/ThemeProvider";
 
 export default function RootProvider({ children }) {
   return (
@@ -8,7 +7,7 @@ export default function RootProvider({ children }) {
       <Sidebar />
       <div className="flex-1">
         <Header />
-        <ThemeProvider>{children}</ThemeProvider>
+        <div className="w-full h-full bg-app-inner-bg">{children}</div>
       </div>
     </div>
   );

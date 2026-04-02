@@ -1,4 +1,5 @@
 import RootProvider from "@/providers/RootProvider";
+import ThemeProvider from "@/providers/ThemeProvider";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
@@ -19,8 +20,10 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${montserrat.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        <RootProvider>{children}</RootProvider>
+      <body className="flex flex-col bg-background text-foreground">
+        <ThemeProvider>
+          <RootProvider>{children}</RootProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
