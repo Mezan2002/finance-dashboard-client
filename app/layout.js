@@ -1,3 +1,4 @@
+import RootProvider from "@/providers/RootProvider";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
@@ -13,8 +14,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${montserrat.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <RootProvider>{children}</RootProvider>
+      </body>
     </html>
   );
 }
