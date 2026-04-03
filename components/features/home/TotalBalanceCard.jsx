@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui";
 import {
   ArrowUpRight,
@@ -8,7 +10,12 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
+import { useTransactions } from "@/providers/TransactionProvider";
+
 const TotalBalanceCard = () => {
+  const { transactions } = useTransactions();
+  const totalBalance = transactions.reduce((acc, tx) => acc + tx.amount, 0);
+
   return (
     <div className="bg-background rounded-2xl p-4 col-span-4">
       <div className="flex items-center justify-between">
@@ -25,7 +32,9 @@ const TotalBalanceCard = () => {
       </div>
 
       <div>
-        <p className="text-4xl font-semibold mt-2">$12,345.67</p>
+        <p className="text-4xl font-semibold mt-2">
+          ${totalBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+        </p>
         <p className="text-sm text-text-base">Available Balance</p>
       </div>
 

@@ -1,16 +1,34 @@
+"use client";
+
 import Header from "@/components/shared/Header";
 import Sidebar from "@/components/shared/Sidebar";
+import { RoleProvider } from "./RoleProvider";
+import ThemeProvider from "./ThemeProvider";
+import { TransactionProvider } from "./TransactionProvider";
 
-export default function RootProvider({ children }) {
+const RootProvider = ({ children }) => {
   return (
-    <div className="flex h-full">
-      <Sidebar />
-      <div className="flex-1 max-h-screen overflow-hidden">
-        <Header />
-        <div className="w-full h-full bg-app-inner-bg overflow-y-auto p-4 rounded-l-3xl">
-          {children}
-        </div>
-      </div>
-    </div>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <RoleProvider>
+        <TransactionProvider>
+          <div className="flex h-screen overflow-hidden bg-app-inner-bg">
+            <Sidebar />
+            <div className="flex-1 max-h-screen overflow-hidden flex flex-col">
+              <Header />
+              <div className="flex-1 w-full h-full bg-app-inner-bg overflow-y-auto p-4 md:p-6 rounded-l-[32px]">
+                {children}
+              </div>
+            </div>
+          </div>
+        </TransactionProvider>
+      </RoleProvider>
+    </ThemeProvider>
   );
-}
+};
+
+export default RootProvider;
