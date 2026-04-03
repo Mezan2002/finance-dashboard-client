@@ -2,12 +2,15 @@ import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui";
 
+import BalanceTrendChart from "@/components/features/home/BalanceTrendChart";
 import GridOverviewCards from "@/components/features/home/GridOverviewCards";
+import PrimaryGoals from "@/components/features/home/PrimaryGoals";
+import SpendingBreakdownChart from "@/components/features/home/SpendingBreakdownChart";
 import TotalBalanceCard from "@/components/features/home/TotalBalanceCard";
 
 const Home = () => {
   return (
-    <section>
+    <section className="pb-20">
       <div className="flex items-center justify-between">
         {/* Greeting */}
         <div>
@@ -27,10 +30,16 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 mt-8">
+      <div className="grid grid-cols-12 gap-3 mt-8">
         {/* Overview cards */}
         <TotalBalanceCard />
         <GridOverviewCards />
+        <PrimaryGoals />
+      </div>
+
+      <div className="grid grid-cols-12 gap-3 mt-3">
+        <BalanceTrendChart />
+        <SpendingBreakdownChart />
       </div>
     </section>
   );

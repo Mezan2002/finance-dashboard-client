@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const TotalBalanceCard = () => {
   return (
-    <div className="bg-background rounded-2xl p-4">
+    <div className="bg-background rounded-2xl p-4 col-span-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="size-10 rounded-full bg-app-inner-bg flex items-center justify-center">
