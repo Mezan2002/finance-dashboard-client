@@ -8,7 +8,7 @@ const Button = ({ children, onClick, className = "", variant = "default" }) => {
 
   return (
     <button
-      className={`px-4 py-2 rounded-lg flex justify-center text-center items-center gap-2 ${className} ${variantClasses[variant]}`}
+      className={`px-4 py-2 rounded-lg flex justify-center text-center items-center gap-2 cursor-pointer ${className} ${variantClasses[variant]}`}
       onClick={onClick}
     >
       {children}

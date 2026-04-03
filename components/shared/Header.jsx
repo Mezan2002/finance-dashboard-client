@@ -1,3 +1,8 @@
+"use client";
+
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import {
   Bell,
   ChevronDown,
@@ -9,18 +14,27 @@ import {
 
 import ThemeToggler from "@/components/shared/ThemeToggler";
 import { Breadcrumb, Button } from "@/components/ui";
-import Image from "next/image";
 
 const Header = () => {
+  const router = useRouter();
+
   return (
     <div className="w-full py-3 flex items-center justify-between px-4">
       {/* left section */}
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-1">
-          <Button variant="outline" className="p-1!">
+          <Button
+            variant="outline"
+            className="p-1!"
+            onClick={() => router.back()}
+          >
             <ChevronLeft className="size-4 text-text-base" />
           </Button>
-          <Button variant="outline" className="p-1!">
+          <Button
+            variant="outline"
+            className="p-1!"
+            onClick={() => router.forward()}
+          >
             <ChevronRight className="size-4 text-text-base" />
           </Button>
         </div>
