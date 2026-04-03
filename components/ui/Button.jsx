@@ -1,4 +1,4 @@
-const Button = ({ children, onClick, className, variant = "default" }) => {
+const Button = ({ children, onClick, className = "", variant = "default" }) => {
   const variantClasses = {
     default:
       "bg-foreground text-background w-full py-2 rounded-lg mt-4 font-medium hover:opacity-90 transition-opacity",
@@ -8,7 +8,7 @@ const Button = ({ children, onClick, className, variant = "default" }) => {
 
   return (
     <button
-      className={`px-4 py-2 rounded-lg ${className} ${variantClasses[variant]}`}
+      className={`px-4 py-2 rounded-lg flex justify-center text-center items-center gap-2 ${className} ${variantClasses[variant]}`}
       onClick={onClick}
     >
       {children}

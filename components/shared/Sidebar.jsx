@@ -18,7 +18,7 @@ const Sidebar = () => {
       <div className="pb-4">
         {/* Logo section */}
         <div className="flex gap-3 p-4">
-          <h4 className="text-center text-3xl font-bold rounded">Finzo</h4>
+          <h4 className="text-center text-3xl font-bold">Finzo</h4>
         </div>
 
         {/* search bar */}

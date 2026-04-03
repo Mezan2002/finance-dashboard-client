@@ -39,7 +39,7 @@ const Header = () => {
           <HelpCircle className="size-5 text-foreground" />
         </Button>
         <ThemeToggler />
-        <div className="p-0.5 rounded-lg border border-border-color flex items-center gap-2">
+        <div className="py-0.5 px-2 rounded-lg border border-border-color flex items-center gap-2">
           <Image
             src="/images/profile.png"
             alt="profile"
