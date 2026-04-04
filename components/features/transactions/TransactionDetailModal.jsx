@@ -2,9 +2,6 @@
 
 import { useMemo } from "react";
 
-import { Button } from "@/components/ui";
-import Modal from "@/components/ui/Modal";
-import { useTransactions } from "@/providers/TransactionProvider";
 import {
   Calendar,
   Clock,
@@ -14,6 +11,11 @@ import {
   Search,
   Tag,
 } from "lucide-react";
+
+import { useTransactions } from "@/providers/TransactionProvider";
+
+import { Button } from "@/components/ui";
+import Modal from "@/components/ui/Modal";
 
 const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
   const { ICON_MAP } = useTransactions();
