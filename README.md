@@ -12,7 +12,7 @@
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Tailwind](https://img.shields.io/badge/Tailwind-v4-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Tailwind](https://img.shields.io/badge/Tailwind-CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![ApexCharts](https://img.shields.io/badge/ApexCharts-Premium-FEB019?style=for-the-badge)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ESNext-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Lucide](https://img.shields.io/badge/Lucide-Icons-f59e0b?style=for-the-badge&logo=lucide)
@@ -20,53 +20,65 @@
 
 </div>
 
-## 🎯 The Vision
-**Finzo** is more than just a dashboard; it’s a financial data processor. Designed to solve the complexity of modern wealth tracking, it combines high-performance visualization with a seamless user experience to turn fragmented data into a cohesive financial narrative.
+## 🎯 Project Objective
+The primary goal of this project is to demonstrate a deep understanding of frontend development by building a **clean, interactive, and high-fidelity finance dashboard**. 
+
+This assignment focuses on:
+- **UI/UX Excellence**: Crafting an intuitive and visually sophisticated interface.
+- **Component Architecture**: Building modular, scalable, and reusable React components.
+- **Data Orchestration**: Efficiently handling and visualizing complex financial datasets.
+- **State Integrity**: Managing application logic and user roles with a robust state management approach.
 
 ---
 
-## ✨ Outstanding Features
+## ✨ Core Features (Assignment Requirements)
 
 <div align="center">
 
-| 📊 **Advanced Analytics** | 💼 **Transaction Engine** | 🛡 **Dynamic RBAC** |
+| 📊 **Dashboard Overview** | 💼 **Transactions Engine** | 🛡 **Role-Based UI** |
 | :--- | :--- | :--- |
-| **Balance Velocity**: Real-time area maps showing your net wealth trajectory. | **Live Ledger**: Full CRUD logic with zero-latency synchronization. | **Role Switching**: On-the-fly toggling between Admin and Viewer modes. |
-| **Spending Fingerprint**: Donut charts detailing exactly where your capital flows. | **Intelligent Search**: Deep-filtering by merchant, category, and date range. | **State Persistence**: Role and preferences persist across sessions via LocalStorage. |
+| **KPI Summaries**: Real-time cards for Total Balance, Income, and Expenses. | **Detailed Ledger**: Insightful list with Date, Amount, Category, and Type. | **RBAC Simulation**: Dynamic UI behavior for **Viewer** vs **Admin** roles. |
+| **Trend Mapping**: Visual time-based charts (Balance Trends) and Categorical splits. | **Smart Logic**: Built-in simple filtering, sorting, and merchant-based search. | **Admin Power**: Dedicated CRUD controls (Add/Edit) enabled only for Admin role. |
 
 </div>
 
+### 💡 Advanced Insights Section
+- **Spending Fingerprint**: Automatically identifies the Highest Spending Category based on data.
+- **Temporal Comparison**: Monthly expense vs income comparison via interactive visual bar charts.
+- **Smart Observations**: Rule-based alerts for savings efficiency, spending spikes, and frequent habits.
+
 ---
 
-## 🛠 Tech Deck Matrix
+## 🛠 Tech Stack & Implementation Notes
 
-| Module | Technologies |
-| :--- | :--- |
-| **Core Architecture** | Next.js 15 (App Router), React 19, Context API |
-| **Visual Intelligence** | ApexCharts, Lucide Icons, Custom Chart Wrappers |
-| **Styling & UX** | Tailwind CSS v4, Modern Glassmorphism, CSS Modules |
-| **Persistence Layer** | LocalStorage API, custom synchronization hooks |
+| Module | Technologies | Implementation Logic |
+| :--- | :--- | :--- |
+| **Core Framework** | Next.js 15, React 19 | Using App Router for high-performance routing and modern component structures. |
+| **State Management** | React Context API | Handling transaction data, complex filters, and role-based permissions globally. |
+| **Styling & UX** | Tailwind CSS v4 | Implementing a clean, responsive design with Dark Mode support and Glassmorphism. |
+| **Visualizations** | ApexCharts | Utilizing high-performance SVG charts for trend mapping and spending breakdowns. |
+| **Persistence** | LocalStorage API | Ensuring the dashboard state and user roles persist seamlessly across sessions. |
 
 ---
 
 ## 🏗 Core Architecture
-The application follows a distributed state model through a layered Provider hierarchy, ensuring a single source of truth for all financial modules.
+The application implements a robust data-flow model where state is managed through a layered Provider hierarchy, ensuring a single source of truth.
 
 ```mermaid
 graph TD
     A[Root Provider] --> B[ThemeProvider]
     B --> C[RoleProvider]
     C --> D[TransactionProvider]
-    D --> E[Dashboard home]
-    D --> F[Transactions ledger]
-    D --> G[Insights analytics]
+    D --> E[Dashboard Overview]
+    D --> F[Transactions Ledger]
+    D --> G[Insights Analytics]
 
-    subgraph "Persistence Layer"
-    D -- Sync --> H[(LocalStorage Cache)]
+    subgraph "Data Persistence"
+    D -- Sync --> H[(LocalStorage Engine)]
     end
 
-    subgraph "Logic Layer"
-    C -- Permissions --> I{UI Access Logic}
+    subgraph "Security Logic"
+    C -- RBAC Signal --> I{UI Permission Engine}
     style I fill:#4f46e5,stroke:#333,stroke-width:2px;
     end
 ```
@@ -77,16 +89,16 @@ graph TD
 ```text
 finance-dashboard-client
 ├── app/                        # Next.js App Router (Layout & Pages)
-│   ├── insights/               # Insights Analytics module
+│   ├── insights/               # Advanced Data Analytics module
 │   ├── transactions/           # Transaction Management module
 ├── components/
 │   ├── features/               # High-level feature components (Charts, Summaries)
 │   ├── shared/                 # Reusable layout components (Sidebar, Header)
-│   └── ui/                     # Atomic UI primitives (Buttons, Inputs, Modals)
-├── providers/                # Global State (Context Providers)
-├── hooks/                    # Data aggregation & logic hooks
-├── utils/                    # Formatting & export utilities (CSV/JSON)
-└── public/                   # Static assets & Brand identity
+│   └── ui/                     # Atomic UI primitives (Buttons, Modals, Inputs)
+├── providers/                # Global State Management (Context API)
+├── hooks/                    # Data aggregation & persistence hooks
+├── utils/                    # Formatting, aggregation & export utilities
+└── public/                   # Static assets, fonts & brand assets
 ```
 
 ---
@@ -95,31 +107,29 @@ finance-dashboard-client
 
 To experience the full extent of Finzo’s engineering, follow these steps:
 
-1.  **Toggle Roles**: Use the profile dropdown to switch to **Admin**. Observe the "Add Transaction" button and Action columns appear across the app.
-2.  **Live Updates**: Add or edit a transaction and watch the **Balance Card** and **Area Charts** reactive instantly without a page refresh.
-3.  **Data Export**: Go to the Transactions page and export your filtered ledger to **CSV** or **JSON**.
-4.  **Responsive Check**: Resize the window to mobile. Test the sidebar drawer and the adaptive grid layout of the dashboard components.
+1.  **RBAC Simulation**: Toggle between **Admin** and **Viewer** via the profile dropdown. Notice the "Add Transaction" and action icons disappear for the Viewer.
+2.  **Live Interaction**: Add a transaction as Admin. Watch the **Summary Cards** and **Balance Trend** charts update instantly without refresh.
+3.  **Data Resilience**: Refresh the page. Observe that your transactions and selected role persist thanks to the `localStorage` implementation.
+4.  **Responsive Check**: Resize your browser or use DevTools. Test the mobile sidebar drawer and the adaptive grid layout.
 
 ---
 
 ## 🚦 Setup & Installation
 
-Follow these steps to initialize your local cockpit.
-
-1.  **Clone it**
+1.  **Clone the Repo**
     ```bash
     git clone https://github.com/Mezan2002/finance-dashboard-client
     ```
-2.  **Ignite dependencies**
+2.  **Install Engine**
     ```bash
     npm install
     ```
-3.  **Launch the dev server**
+3.  **Ignite Server**
     ```bash
     npm run dev
     ```
 
-Ready for your local cockpit: [http://localhost:3000](http://localhost:3000)
+Available locally at: [http://localhost:3000](http://localhost:3000)
 
 ---
 
@@ -133,6 +143,6 @@ Ready for your local cockpit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-*Designed and engineered with ❤️ for the Zorvyn FinTech Challenge.*
+*Engineered with ❤️ for the Zorvyn FinTech Frontend Internship Assignment.*
 
 </div>
