@@ -1,9 +1,3 @@
-/**
- * Triggers a browser download for a given blob/content.
- * @param {string} content - The content to download.
- * @param {string} fileName - The desired file name.
- * @param {string} mimeType - The mime type of the file.
- */
 const downloadFile = (content, fileName, mimeType) => {
   const blob = new Blob([content], { type: mimeType });
   const url = window.URL.createObjectURL(blob);
@@ -16,10 +10,6 @@ const downloadFile = (content, fileName, mimeType) => {
   document.body.removeChild(link);
 };
 
-/**
- * Converts transaction data to CSV format.
- * @param {Array} transactions - The list of transactions.
- */
 export const exportToCSV = (transactions) => {
   if (!transactions || transactions.length === 0) return;
 
@@ -41,14 +31,10 @@ export const exportToCSV = (transactions) => {
   downloadFile(
     csvContent,
     `transactions_export_${new Date().toISOString().split("T")[0]}.csv`,
-    "text/csv;charset=utf-8;"
+    "text/csv;charset=utf-8;",
   );
 };
 
-/**
- * Converts transaction data to JSON format.
- * @param {Array} transactions - The list of transactions.
- */
 export const exportToJSON = (transactions) => {
   if (!transactions || transactions.length === 0) return;
 
@@ -57,6 +43,6 @@ export const exportToJSON = (transactions) => {
   downloadFile(
     jsonContent,
     `transactions_export_${new Date().toISOString().split("T")[0]}.json`,
-    "application/json;charset=utf-8;"
+    "application/json;charset=utf-8;",
   );
 };

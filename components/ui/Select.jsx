@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { Check, ChevronDown } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const Select = ({
@@ -25,7 +26,7 @@ const Select = ({
       const rect = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const spaceBelow = windowHeight - rect.bottom;
-      const menuHeight = 280; // max-h-60 (240px) + padding + margins
+      const menuHeight = 280;
 
       if (spaceBelow < menuHeight && rect.top > menuHeight) {
         setPlacement("top");
@@ -89,13 +90,14 @@ const Select = ({
     setIsOpen(!isOpen);
   };
 
-  // Helper to get display label for current value
   const getDisplayLabel = () => {
     if (!value) return placeholder;
-    const selectedOption = options.find((opt) => 
-      (typeof opt === "object" ? opt.value === value : opt === value)
+    const selectedOption = options.find((opt) =>
+      typeof opt === "object" ? opt.value === value : opt === value,
     );
-    return typeof selectedOption === "object" ? selectedOption.label : selectedOption || value;
+    return typeof selectedOption === "object"
+      ? selectedOption.label
+      : selectedOption || value;
   };
 
   return (
@@ -127,13 +129,21 @@ const Select = ({
         mounted &&
         createPortal(
           <div
-            className={`select-portal-menu fixed bg-background border border-border-color rounded-2xl shadow-2xl backdrop-blur-md overflow-hidden z-[100] animate-fade-in-up duration-150 ${
+            className={`select-portal-menu fixed bg-background border border-border-color rounded-2xl shadow-2xl backdrop-blur-md overflow-hidden z-100 animate-fade-in-up duration-150 ${
               placement === "top" ? "origin-bottom" : "origin-top"
             }`}
             style={{
               ...(placement === "top"
-                ? { bottom: menuStyle.bottom, left: menuStyle.left, width: menuStyle.width }
-                : { top: menuStyle.top, left: menuStyle.left, width: menuStyle.width }),
+                ? {
+                    bottom: menuStyle.bottom,
+                    left: menuStyle.left,
+                    width: menuStyle.width,
+                  }
+                : {
+                    top: menuStyle.top,
+                    left: menuStyle.left,
+                    width: menuStyle.width,
+                  }),
             }}
           >
             <div className="max-h-60 overflow-y-auto p-1.5 space-y-1 font-montserrat">
@@ -163,7 +173,7 @@ const Select = ({
               })}
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </div>
   );

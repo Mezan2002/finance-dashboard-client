@@ -20,9 +20,8 @@ const RootProvider = ({ children }) => {
       <RoleProvider>
         <TransactionProvider>
           <div className="flex h-screen overflow-hidden bg-app-inner-bg">
-            {/* Sidebar toggle logic handled inside */}
             <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-            
+
             <div className="flex-1 max-h-screen overflow-hidden flex flex-col">
               <Header onMenuClick={() => setIsSidebarOpen(true)} />
               <div className="flex-1 w-full h-full bg-app-inner-bg overflow-y-auto p-4 md:p-6 lg:rounded-l-[32px]">

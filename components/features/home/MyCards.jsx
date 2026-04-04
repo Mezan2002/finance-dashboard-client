@@ -78,7 +78,7 @@ const MyCards = () => {
 
         <div
           key={currentCard.id}
-          className={`w-full h-[280px] rounded-3xl bg-linear-to-b ${currentCard.color} p-8 flex flex-col justify-between text-white shadow-2xl relative overflow-hidden transition-all duration-700 ease-out animate-in fade-in zoom-in-95 slide-in-from-right-8 group border border-white/5`}
+          className={`w-full h-[300px] max-w-lg rounded-3xl bg-linear-to-b ${currentCard.color} p-8 flex flex-col justify-between text-white shadow-2xl relative overflow-hidden transition-all duration-700 ease-out animate-in fade-in zoom-in-95 slide-in-from-right-8 group border border-white/5`}
         >
           <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-white/5 to-transparent pointer-events-none" />
 
@@ -130,7 +130,6 @@ const MyCards = () => {
         </div>
       </div>
 
-      {/* Footer Navigation Indicators */}
       <div className="flex items-center justify-center gap-3 mt-8">
         <div className="flex gap-1.5 items-center">
           {CARDS.map((_, i) => (

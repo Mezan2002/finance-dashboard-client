@@ -1,7 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const Modal = ({ isOpen, onClose, title, children }) => {
   useEffect(() => {
