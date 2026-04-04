@@ -9,7 +9,7 @@ This project is a clean, interactive, and high-fidelity finance dashboard built 
 
 > - **Assignment Portal:** [screening.zorvyn.io](https://screening.zorvyn.io/)
 > - **GitHub Repository:** [github.com/Mezan2002/finance-dashboard-client](https://github.com/Mezan2002/finance-dashboard-client)
-> - **Live Demo (Vercel):** `[Your Deployment Link Here]`
+> - **Live Demo (Vercel):** [https://finance-dashboard-client-sigma.vercel.app/](https://finance-dashboard-client-sigma.vercel.app/)
 
 ---
 
