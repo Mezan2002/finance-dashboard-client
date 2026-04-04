@@ -13,15 +13,15 @@ const Insights = () => {
         description="Analyzing your spending patterns and trends to optimize your finances..."
       />
 
-      <div className="grid grid-cols-12 gap-3 mt-8">
-        <div className="col-span-8">
+      <div className="grid grid-cols-12 gap-6">
+        <div className="lg:col-span-8 col-span-12 h-full">
           <ComparisonBarChart />
         </div>
 
         <HighestSpendCategory />
       </div>
 
-      <div className="grid grid-cols-12 gap-3">
+      <div className="grid grid-cols-12 gap-6">
         <Observations />
       </div>
     </section>

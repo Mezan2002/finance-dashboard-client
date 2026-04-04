@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   HelpCircle,
+  Menu,
   MessageCircle,
 } from "lucide-react";
 
@@ -16,15 +17,23 @@ import { useRole } from "@/providers/RoleProvider";
 import ThemeToggler from "@/components/shared/ThemeToggler";
 import { Breadcrumb, Button } from "@/components/ui";
 
-const Header = () => {
+const Header = ({ onMenuClick }) => {
   const router = useRouter();
   const { role, setRole } = useRole();
 
   return (
     <div className="w-full py-3 flex items-center justify-between px-4">
       {/* left section */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-1">
+      <div className="flex items-center gap-2">
+        <Button
+          variant="outline"
+          className="p-2! lg:hidden"
+          onClick={onMenuClick}
+        >
+          <Menu className="size-5 text-foreground" />
+        </Button>
+        
+        <div className="hidden sm:flex items-center gap-1">
           <Button
             variant="outline"
             className="p-1!"

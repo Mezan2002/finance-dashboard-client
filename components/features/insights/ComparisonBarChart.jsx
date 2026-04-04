@@ -1,29 +1,58 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
+import { useTransactions } from "@/providers/TransactionProvider";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const ComparisonBarChart = () => {
   const { theme } = useTheme();
+  const { transactions } = useTransactions();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const series = [
-    {
-      name: "Income",
-      data: [4400, 5500, 4100, 6700, 2200, 4300],
-    },
-    {
-      name: "Expense",
-      data: [3300, 3200, 3300, 5200, 1300, 4300],
-    },
-  ];
+  // Calculate dynamic 6-month comparison
+  const { series, categories } = useMemo(() => {
+    const months = [];
+    const now = new Date();
+    
+    // Generate last 6 months
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      months.push({
+        label: d.toLocaleString("default", { month: "short" }),
+        month: d.getMonth(),
+        year: d.getFullYear(),
+        income: 0,
+        expense: 0,
+      });
+    }
+
+    // Aggregate data
+    transactions.forEach((tx) => {
+      const txDate = new Date(tx.date);
+      const match = months.find(
+        (m) => m.month === txDate.getMonth() && m.year === txDate.getFullYear()
+      );
+      if (match) {
+        if (tx.type === "income") match.income += tx.amount;
+        else match.expense += Math.abs(tx.amount);
+      }
+    });
+
+    return {
+      series: [
+        { name: "Income", data: months.map((m) => m.income) },
+        { name: "Expense", data: months.map((m) => m.expense) },
+      ],
+      categories: months.map((m) => m.label),
+    };
+  }, [transactions]);
 
   const options = {
     chart: {
@@ -52,7 +81,7 @@ const ComparisonBarChart = () => {
       colors: ["transparent"],
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      categories: categories,
       axisBorder: {
         show: false,
       },
@@ -80,6 +109,7 @@ const ComparisonBarChart = () => {
           colors: mounted && theme === "dark" ? "#999999" : "#a6a6a6",
           fontSize: "12px",
         },
+        formatter: (val) => `${(val / 1000).toFixed(1)}k`,
       },
     },
     fill: {
@@ -125,7 +155,9 @@ const ComparisonBarChart = () => {
         </div>
       </div>
       <div className="h-[300px] w-full">
-        <Chart options={options} series={series} type="bar" height="100%" />
+        {mounted && (
+          <Chart options={options} series={series} type="bar" height="100%" />
+        )}
       </div>
     </div>
   );

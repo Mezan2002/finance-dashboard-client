@@ -45,7 +45,7 @@ const PrimaryGoals = () => {
 
   return (
     <div className="bg-background rounded-2xl p-4 col-span-3 relative overflow-hidden">
-      <h5 className="text-xl font-semibold">Primary Goals</h5>
+      <h5 className="text-xl font-semibold">Goals</h5>
       <p className="text-sm text-text-base">Manage your primary goals</p>
 
       <div className="mt-6 text-center">

@@ -122,7 +122,7 @@ const SpendingBreakdownChart = () => {
   };
 
   return (
-    <div className="bg-background rounded-2xl p-6 col-span-4 flex flex-col">
+    <div className="bg-background rounded-2xl p-6 lg:col-span-4 col-span-12 flex flex-col border border-border-color shadow-sm">
       <div className="mb-4">
         <h5 className="text-xl font-semibold">Spending Breakdown</h5>
         <p className="text-sm text-text-base">Categorical expenses summary</p>

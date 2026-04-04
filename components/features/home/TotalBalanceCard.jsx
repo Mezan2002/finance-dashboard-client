@@ -17,7 +17,7 @@ const TotalBalanceCard = () => {
   const totalBalance = transactions.reduce((acc, tx) => acc + tx.amount, 0);
 
   return (
-    <div className="bg-background rounded-2xl p-4 col-span-4">
+    <div className="bg-background rounded-2xl p-4 lg:col-span-4 col-span-12">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="size-10 rounded-full bg-app-inner-bg flex items-center justify-center">

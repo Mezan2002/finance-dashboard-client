@@ -169,8 +169,8 @@ const BalanceTrendChart = () => {
   };
 
   return (
-    <div className="bg-background rounded-2xl col-span-8 overflow-hidden flex flex-col pt-6 border border-border-color shadow-sm">
-      <div className="flex items-start justify-between px-6 mb-2">
+    <div className="bg-background rounded-2xl p-6 lg:col-span-8 col-span-12 flex flex-col border border-border-color shadow-sm">
+      <div className="flex items-start justify-between mb-2">
         <div>
           <h5 className="text-xl font-semibold">Balance Trend</h5>
           <p className="text-sm text-text-base">

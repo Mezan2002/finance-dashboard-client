@@ -26,7 +26,7 @@ const GridOverviewCards = () => {
   const savingsRate = totalIncome > 0 ? (netSavings / totalIncome) * 100 : 0;
 
   return (
-    <div className="grid grid-cols-2 gap-3 bg-background p-4 rounded-2xl col-span-5">
+    <div className="grid grid-cols-2 gap-3 bg-background p-4 rounded-2xl lg:col-span-5 col-span-12">
       {/* Income card */}
       <div className="bg-foreground rounded-2xl p-3 h-max">
         <div className="flex items-center gap-2">
