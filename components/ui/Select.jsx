@@ -77,7 +77,8 @@ const Select = ({
   }, [isOpen]);
 
   const handleSelect = (option) => {
-    onChange(option);
+    const optionValue = typeof option === "object" ? option.value : option;
+    onChange(optionValue);
     setIsOpen(false);
   };
 
@@ -86,6 +87,15 @@ const Select = ({
       updatePosition();
     }
     setIsOpen(!isOpen);
+  };
+
+  // Helper to get display label for current value
+  const getDisplayLabel = () => {
+    if (!value) return placeholder;
+    const selectedOption = options.find((opt) => 
+      (typeof opt === "object" ? opt.value === value : opt === value)
+    );
+    return typeof selectedOption === "object" ? selectedOption.label : selectedOption || value;
   };
 
   return (
@@ -103,7 +113,7 @@ const Select = ({
         <span
           className={value ? "text-foreground font-semibold" : "text-text-base"}
         >
-          {value || placeholder}
+          {getDisplayLabel()}
         </span>
         <ChevronDown
           className={`size-4 text-text-base transition-transform duration-200 ${
@@ -117,8 +127,8 @@ const Select = ({
         mounted &&
         createPortal(
           <div
-            className={`select-portal-menu fixed bg-background border border-border-color rounded-2xl shadow-2xl backdrop-blur-md overflow-hidden z-100 animate-in fade-in duration-150 ${
-              placement === "top" ? "slide-in-from-bottom-2 origin-bottom" : "slide-in-from-top-2 origin-top"
+            className={`select-portal-menu fixed bg-background border border-border-color rounded-2xl shadow-2xl backdrop-blur-md overflow-hidden z-[100] animate-fade-in-up duration-150 ${
+              placement === "top" ? "origin-bottom" : "origin-top"
             }`}
             style={{
               ...(placement === "top"
@@ -127,23 +137,30 @@ const Select = ({
             }}
           >
             <div className="max-h-60 overflow-y-auto p-1.5 space-y-1 font-montserrat">
-              {options.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => handleSelect(option)}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-between transition-all group ${
-                    value === option
-                      ? "bg-foreground text-background"
-                      : "text-text-base hover:bg-app-inner-bg hover:text-foreground"
-                  }`}
-                >
-                  <span>{option}</span>
-                  {value === option && (
-                    <Check className="size-4 animate-in fade-in scale-100" />
-                  )}
-                </button>
-              ))}
+              {options.map((option) => {
+                const isObject = typeof option === "object";
+                const optValue = isObject ? option.value : option;
+                const optLabel = isObject ? option.label : option;
+                const isSelected = value === optValue;
+
+                return (
+                  <button
+                    key={optValue}
+                    type="button"
+                    onClick={() => handleSelect(option)}
+                    className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-between transition-all group ${
+                      isSelected
+                        ? "bg-foreground text-background"
+                        : "text-text-base hover:bg-app-inner-bg hover:text-foreground"
+                    }`}
+                  >
+                    <span>{optLabel}</span>
+                    {isSelected && (
+                      <Check className="size-4 animate-in fade-in scale-100" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>,
           document.body

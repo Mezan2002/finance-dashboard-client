@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Input, Modal, Select } from "@/components/ui";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
 const CATEGORIES = [
@@ -14,7 +15,7 @@ const CATEGORIES = [
   "Other",
 ];
 
-const TransactionFormModal = ({ isOpen, onClose, onSave, transaction }) => {
+const TransactionFormModal = ({ isOpen, onClose, onSave, transaction, isMutating }) => {
   const [formData, setFormData] = useState({
     merchant: transaction?.merchant || "",
     amount: transaction?.amount ? Math.abs(transaction.amount) : "",
@@ -119,10 +120,12 @@ const TransactionFormModal = ({ isOpen, onClose, onSave, transaction }) => {
             variant="outline"
             className="flex-1 mt-0!"
             onClick={onClose}
+            disabled={isMutating}
           >
             Cancel
           </Button>
-          <Button type="submit" className="flex-1 mt-0!">
+          <Button type="submit" className="flex-1 mt-0!" disabled={isMutating}>
+            {isMutating && <Loader2 className="size-4 animate-spin mr-2" />}
             {transaction ? "Save Changes" : "Create Transaction"}
           </Button>
         </div>

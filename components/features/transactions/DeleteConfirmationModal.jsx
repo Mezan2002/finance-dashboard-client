@@ -1,13 +1,14 @@
 "use client";
 
 import { Button, Modal } from "@/components/ui";
-import { Trash2 } from "lucide-react";
+import { Trash2, Loader2 } from "lucide-react";
 
 const DeleteConfirmationModal = ({
   isOpen,
   onClose,
   onConfirm,
   transaction,
+  isMutating,
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Delete Transaction">
@@ -33,16 +34,18 @@ const DeleteConfirmationModal = ({
             variant="outline"
             className="flex-1 mt-0!"
             onClick={onClose}
+            disabled={isMutating}
           >
             Cancel
           </Button>
           <Button
-            className="flex-1 mt-0! bg-rose-500 hover:bg-rose-600 text-white border-transparent"
+            className="flex-1 mt-0! bg-rose-500 hover:bg-rose-600 text-white border-transparent gap-2"
             onClick={() => {
               onConfirm(transaction);
-              onClose();
             }}
+            disabled={isMutating}
           >
+            {isMutating && <Loader2 className="size-4 animate-spin" />}
             Delete Permanently
           </Button>
         </div>

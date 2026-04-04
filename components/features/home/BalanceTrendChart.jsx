@@ -20,29 +20,45 @@ const BalanceTrendChart = () => {
     setMounted(true);
   }, []);
 
-  // Process data based on transactions
+  // Process data based on transactions and active filter
   const chartData = useMemo(() => {
     if (!transactions.length) return { series: [], categories: [] };
 
-    // Grouping by date for the active month (simplification for demo)
-    const sorted = [...transactions].sort(
-      (a, b) => new Date(a.date) - new Date(b.date),
-    );
+    const now = new Date();
+    const filterDays = { D: 1, W: 7, M: 30, Y: 365 };
 
-    let currentBalance = 0;
-    const dataPoints = sorted.map((tx) => {
-      currentBalance += tx.amount;
-      return {
-        date: tx.date.split("-").slice(1).join("/"), // MM/DD format
-        balance: currentBalance,
-      };
+    const daysToLookBack = filterDays[activeFilter] || 30;
+    const cutoffDate = new Date();
+    cutoffDate.setDate(now.getDate() - daysToLookBack);
+
+    // Filter and sort by date
+    const filtered = transactions
+      .filter((tx) => new Date(tx.date) >= cutoffDate)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    if (filtered.length === 0) return { series: [], categories: [] };
+
+    // Group by date to avoid overlaps
+    const dailyTotals = filtered.reduce((acc, tx) => {
+      if (!acc[tx.date]) acc[tx.date] = 0;
+      acc[tx.date] += tx.amount;
+      return acc;
+    }, {});
+
+    const sortedDates = Object.keys(dailyTotals).sort((a, b) => new Date(a) - new Date(b));
+
+    let runningBalance = 0;
+    const series = [];
+    const categories = [];
+
+    sortedDates.forEach((date) => {
+      runningBalance += dailyTotals[date];
+      series.push(runningBalance);
+      categories.push(date.split("-").slice(1).join("/")); // MM/DD
     });
 
-    return {
-      series: dataPoints.map((d) => d.balance),
-      categories: dataPoints.map((d) => d.date),
-    };
-  }, [transactions]);
+    return { series, categories };
+  }, [transactions, activeFilter]);
 
   const series = [
     {
@@ -65,6 +81,11 @@ const BalanceTrendChart = () => {
       fontFamily: "var(--font-montserrat)",
       selection: {
         enabled: false,
+      },
+    },
+    plotOptions: {
+      area: {
+        fillTo: "end", // Ensures gradient is always at the bottom
       },
     },
     states: {
@@ -98,6 +119,7 @@ const BalanceTrendChart = () => {
     },
     xaxis: {
       categories: chartData.categories,
+      tickAmount: 10,
       axisBorder: {
         show: false,
       },
@@ -119,6 +141,7 @@ const BalanceTrendChart = () => {
         show: false,
       },
       labels: {
+        offsetX: -10,
         formatter: (val) => `$${(val / 1000).toFixed(1)}k`,
         style: {
           colors: mounted && theme === "dark" ? "#999999" : "#a6a6a6",
@@ -127,12 +150,11 @@ const BalanceTrendChart = () => {
       },
     },
     grid: {
-      show: true,
-      borderColor: mounted && theme === "dark" ? "#262626" : "#f1f1f1",
-      strokeDashArray: 4,
+      show: false,
       padding: {
-        left: 10,
-        right: 10,
+        left: 20,
+        right: 0,
+        bottom: 0,
       },
     },
     tooltip: {
@@ -147,8 +169,8 @@ const BalanceTrendChart = () => {
   };
 
   return (
-    <div className="bg-background rounded-2xl p-6 col-span-8">
-      <div className="flex items-start justify-between mb-6">
+    <div className="bg-background rounded-2xl col-span-8 overflow-hidden flex flex-col pt-6 border border-border-color shadow-sm">
+      <div className="flex items-start justify-between px-6 mb-2">
         <div>
           <h5 className="text-xl font-semibold">Balance Trend</h5>
           <p className="text-sm text-text-base">
@@ -164,7 +186,7 @@ const BalanceTrendChart = () => {
               onClick={() => setActiveFilter(filter)}
               className={`px-3 py-1 rounded-md text-xs font-semibold transition-all border border-transparent ${
                 activeFilter === filter
-                  ? "bg-background text-foreground shadow-inner border-border-color!"
+                  ? "bg-background text-foreground shadow-inner border-shadow!"
                   : "text-text-base hover:text-foreground"
               }`}
             >
@@ -173,8 +195,10 @@ const BalanceTrendChart = () => {
           ))}
         </div>
       </div>
-      <div className="h-[250px] w-full flex items-center justify-center">
-        {mounted && chartData.series.length > 0 ? (
+      <div className="h-[250px] w-full mt-auto">
+        {!mounted ? (
+          <div className="animate-pulse bg-app-inner-bg w-full h-full" />
+        ) : chartData.series.length > 0 ? (
           <Chart
             options={options}
             series={series}
@@ -182,10 +206,16 @@ const BalanceTrendChart = () => {
             height="100%"
             width="100%"
           />
-        ) : mounted ? (
-          <p className="text-text-base text-sm">No trend data available.</p>
         ) : (
-          <div className="animate-pulse bg-app-inner-bg w-full h-[200px] rounded-xl" />
+          <div className="flex flex-col items-center justify-center h-full gap-2 p-6 animate-fade-in">
+            <div className="size-12 rounded-full bg-app-inner-bg flex items-center justify-center mb-2">
+              <span className="text-2xl">📊</span>
+            </div>
+            <p className="font-bold text-sm">No Data Found</p>
+            <p className="text-xs text-text-base text-center max-w-[200px]">
+              We couldn&apos;t find any transactions for the selected period.
+            </p>
+          </div>
         )}
       </div>
     </div>
