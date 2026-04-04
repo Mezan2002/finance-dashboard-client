@@ -143,7 +143,7 @@ const Transactions = () => {
   };
 
   return (
-    <section className="pb-20 space-y-8">
+    <section className="pb-5 space-y-8">
       <PageHeader
         title="Transactions Activity"
         description="Detailed breakdown of your financial history and activity..."

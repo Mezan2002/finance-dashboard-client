@@ -7,7 +7,7 @@ import PageHeader from "@/components/shared/PageHeader";
 
 const Insights = () => {
   return (
-    <section className="pb-20 space-y-8">
+    <section className="pb-5 space-y-8">
       <PageHeader
         title="Financial Insights"
         description="Analyzing your spending patterns and trends to optimize your finances..."

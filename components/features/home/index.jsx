@@ -3,23 +3,33 @@ import GridOverviewCards from "@/components/features/home/GridOverviewCards";
 import PrimaryGoals from "@/components/features/home/PrimaryGoals";
 import SpendingBreakdownChart from "@/components/features/home/SpendingBreakdownChart";
 import TotalBalanceCard from "@/components/features/home/TotalBalanceCard";
+import MyCards from "@/components/features/home/MyCards";
+import RecentActivity from "@/components/features/home/RecentActivity";
 import PageHeader from "@/components/shared/PageHeader";
 
 const Home = () => {
   return (
-    <section className="pb-20">
+    <section className="pb-5 space-y-4">
       <PageHeader
         title="Welcome back, Mezanur 👋"
-        description="Manage your finances and track your monthly expenses..."
+        description="Your financial health is looking great. Track your wealth and insights below."
       />
 
-      <div className="grid grid-cols-12 gap-3 mt-8">
+      {/* Main Stats Row */}
+      <div className="grid grid-cols-12 gap-4">
         <TotalBalanceCard />
         <GridOverviewCards />
         <PrimaryGoals />
       </div>
 
-      <div className="grid grid-cols-12 gap-3 mt-3">
+      {/* Modern Dashboard Core */}
+      <div className="grid grid-cols-12 gap-4">
+        <MyCards />
+        <RecentActivity />
+      </div>
+
+      {/* Insightful Visuals */}
+      <div className="grid grid-cols-12 gap-4">
         <BalanceTrendChart />
         <SpendingBreakdownChart />
       </div>

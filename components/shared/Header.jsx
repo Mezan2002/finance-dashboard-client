@@ -8,14 +8,12 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  HelpCircle,
   Menu,
-  MessageCircle,
 } from "lucide-react";
 
-import { useRole } from "@/providers/RoleProvider";
 import ThemeToggler from "@/components/shared/ThemeToggler";
 import { Breadcrumb, Button } from "@/components/ui";
+import { useRole } from "@/providers/RoleProvider";
 
 const Header = ({ onMenuClick }) => {
   const router = useRouter();
@@ -32,7 +30,7 @@ const Header = ({ onMenuClick }) => {
         >
           <Menu className="size-5 text-foreground" />
         </Button>
-        
+
         <div className="hidden sm:flex items-center gap-1">
           <Button
             variant="outline"
@@ -60,10 +58,10 @@ const Header = ({ onMenuClick }) => {
           <Bell className="size-5 text-foreground" />
         </Button>
         <ThemeToggler />
-        
+
         {/* Role Switcher Dropdown */}
         <div className="relative group">
-          <div className="py-0.5 px-2 rounded-lg border border-border-color flex items-center gap-2 cursor-pointer hover:bg-app-inner-bg transition-colors">
+          <div className="py-1 px-2 rounded-lg border border-border-color flex items-center gap-2 cursor-pointer hover:bg-app-inner-bg transition-colors">
             <Image
               src="/images/profile.png"
               alt="profile"
@@ -73,7 +71,7 @@ const Header = ({ onMenuClick }) => {
             />
             <div className="hidden sm:block">
               <p className="text-sm font-medium leading-none">John Doe</p>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-indigo-500 mt-1">
+              <p className="text-[10px] font-bold uppercase tracking-wider">
                 {role}
               </p>
             </div>
@@ -81,23 +79,23 @@ const Header = ({ onMenuClick }) => {
           </div>
 
           {/* Dropdown Content */}
-          <div className="absolute right-0 top-full mt-1 w-40 bg-background border border-border-color rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
-            <button
-              onClick={() => setRole("admin")}
-              className={`w-full px-4 py-2 text-left text-xs font-semibold hover:bg-app-inner-bg transition-colors ${
-                role === "admin" ? "text-indigo-500 bg-app-inner-bg" : "text-text-base"
-              }`}
-            >
-              Set as Admin
-            </button>
-            <button
-              onClick={() => setRole("viewer")}
-              className={`w-full px-4 py-2 text-left text-xs font-semibold hover:bg-app-inner-bg transition-colors ${
-                role === "viewer" ? "text-indigo-500 bg-app-inner-bg" : "text-text-base"
-              }`}
-            >
-              Set as Viewer
-            </button>
+          <div className="absolute right-0 top-full mt-2 w-48 bg-background border border-border-color rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden py-1.5 translate-y-1 group-hover:translate-y-0">
+            {["admin", "viewer"].map((r) => (
+              <button
+                key={r}
+                onClick={() => setRole(r)}
+                className={`w-full px-4 py-2.5 flex items-center justify-between text-xs font-black uppercase tracking-widest transition-all hover:bg-app-inner-bg ${
+                  role === r
+                    ? "text-foreground bg-app-inner-bg/50 font-black"
+                    : "text-text-light opacity-80"
+                }`}
+              >
+                <span>Set as {r}</span>
+                {role === r && (
+                  <div className="size-1.5 rounded-full bg-indigo-500 shadow-sm shadow-indigo-500/50" />
+                )}
+              </button>
+            ))}
           </div>
         </div>
       </div>
