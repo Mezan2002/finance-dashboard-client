@@ -177,8 +177,6 @@ Open it in your browser to view the dashboard.
 Frontend Developer  
 📍 Dhaka, Bangladesh
 
-[![GitHub](https://img.shields.io/badge/GitHub-AnkitDimri4-black?logo=github)](https://github.com/AnkitDimri4) [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ankit%20Dimri-blue?logo=linkedin)](https://linkedin.com/in/ankit-dimri-a6ab98263) [![LeetCode](https://img.shields.io/badge/LeetCode-Profile-orange?logo=leetcode)](https://leetcode.com/u/user4612MW/)
-
 ---
 
 <div align="center">
