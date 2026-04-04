@@ -8,6 +8,7 @@ import { useTransactions } from "@/providers/TransactionProvider";
 import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 
 import DeleteConfirmationModal from "@/components/features/transactions/DeleteConfirmationModal";
+import TransactionDetailModal from "@/components/features/transactions/TransactionDetailModal";
 import TransactionFilters from "@/components/features/transactions/TransactionFilters";
 import TransactionFormModal from "@/components/features/transactions/TransactionFormModal";
 import TransactionTable from "@/components/features/transactions/TransactionTable";
@@ -30,7 +31,9 @@ const Transactions = () => {
   // Local UI states for Modals
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedTx, setSelectedTx] = useState(null);
+  const [selectedDetailTx, setSelectedDetailTx] = useState(null);
 
   // Sorting state
   const [sortConfig, setSortConfig] = useState({
@@ -111,6 +114,11 @@ const Transactions = () => {
     setIsDeleteOpen(true);
   };
 
+  const handleViewDetail = (tx) => {
+    setSelectedDetailTx(tx);
+    setIsDetailOpen(true);
+  };
+
   const handleCreate = () => {
     setSelectedTx(null);
     setIsFormOpen(true);
@@ -168,6 +176,7 @@ const Transactions = () => {
           onSort={handleSort}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          onViewDetail={handleViewDetail}
           role={role}
           onClearFilters={clearFilters}
         />
@@ -187,6 +196,11 @@ const Transactions = () => {
         onConfirm={onConfirmDelete}
         transaction={selectedTx}
         isMutating={isMutating}
+      />
+      <TransactionDetailModal
+        isOpen={isDetailOpen}
+        onClose={() => setIsDetailOpen(false)}
+        transaction={selectedDetailTx}
       />
     </section>
   );

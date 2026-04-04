@@ -3,7 +3,14 @@
 import { Edit2, Search, Trash2 } from "lucide-react";
 import { useTransactions } from "@/providers/TransactionProvider";
 
-const TransactionRow = ({ transaction, index, onEdit, onDelete, role }) => {
+const TransactionRow = ({
+  transaction,
+  index,
+  onEdit,
+  onDelete,
+  onViewDetail,
+  role,
+}) => {
   const { ICON_MAP } = useTransactions();
   const Icon = ICON_MAP[transaction.iconName] || Search;
 
@@ -13,12 +20,17 @@ const TransactionRow = ({ transaction, index, onEdit, onDelete, role }) => {
       style={{ animationDelay: `${index * 30}ms` }}
     >
       <td className="px-6 py-4">
-        <div className="flex items-center gap-4 text-nowrap">
+        <div
+          className="flex items-center gap-4 text-nowrap cursor-pointer hover:translate-x-1 transition-transform"
+          onClick={() => onViewDetail(transaction)}
+        >
           <div className="size-11 rounded-full bg-app-inner-bg flex items-center justify-center border border-border-color group-hover:border-app-accent/30 transition-all">
             <Icon className="size-5 text-text-base group-hover:text-app-accent transition-colors" />
           </div>
           <div>
-            <p className="font-bold text-foreground">{transaction.merchant}</p>
+            <p className="font-bold text-foreground group-hover:text-app-accent transition-colors">
+              {transaction.merchant}
+            </p>
             <p className="text-xs text-text-base">{transaction.category}</p>
           </div>
         </div>

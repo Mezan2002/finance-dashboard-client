@@ -18,6 +18,7 @@ const TransactionTable = ({
   onSort,
   onEdit,
   onDelete,
+  onViewDetail,
   role,
   onClearFilters,
 }) => {
@@ -121,6 +122,7 @@ const TransactionTable = ({
                     index={index}
                     onEdit={onEdit}
                     onDelete={onDelete}
+                    onViewDetail={onViewDetail}
                     role={role}
                   />
                 ))}
