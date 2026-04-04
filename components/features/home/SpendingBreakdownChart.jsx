@@ -65,7 +65,12 @@ const SpendingBreakdownChart = () => {
     },
     legend: {
       position: "bottom",
-      fontSize: "12px",
+      fontSize: "11px",
+      offsetY: 0,
+      itemMargin: {
+        horizontal: 8,
+        vertical: 4,
+      },
       labels: {
         colors: mounted && theme === "dark" ? "#ededed" : "#171717",
       },
@@ -77,23 +82,23 @@ const SpendingBreakdownChart = () => {
       pie: {
         expandOnClick: false,
         donut: {
-          size: "70%",
+          size: "72%",
           labels: {
             show: true,
             total: {
               show: true,
               label: "Total Spent",
-              fontSize: "14px",
+              fontSize: "12px",
               color: mounted && theme === "dark" ? "#a6a6a6" : "#4d4d4d",
               formatter: () => `$${totalSpent.toLocaleString()}`,
             },
             name: {
-              fontSize: "14px",
+              fontSize: "12px",
               color: mounted && theme === "dark" ? "#a6a6a6" : "#4d4d4d",
             },
             value: {
-              fontSize: "20px",
-              fontWeight: 600,
+              fontSize: "18px",
+              fontWeight: 700,
               color: mounted && theme === "dark" ? "#ededed" : "#171717",
               formatter: (val) => `$${val.toLocaleString()}`,
             },
@@ -108,13 +113,18 @@ const SpendingBreakdownChart = () => {
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 640,
         options: {
-          chart: {
-            width: 200,
-          },
           legend: {
             position: "bottom",
+            fontSize: "10px",
+          },
+          plotOptions: {
+            pie: {
+              donut: {
+                size: "65%",
+              },
+            },
           },
         },
       },
@@ -122,7 +132,7 @@ const SpendingBreakdownChart = () => {
   };
 
   return (
-    <div className="bg-background rounded-2xl p-6 lg:col-span-4 col-span-12 flex flex-col border border-border-color shadow-sm">
+    <div className="bg-background rounded-3xl p-6 lg:col-span-4 col-span-12 flex flex-col min-h-[400px]">
       <div className="mb-4">
         <h5 className="text-xl font-semibold">Spending Breakdown</h5>
         <p className="text-sm text-text-base">Categorical expenses summary</p>

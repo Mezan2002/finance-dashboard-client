@@ -20,7 +20,7 @@ const ComparisonBarChart = () => {
   const { series, categories } = useMemo(() => {
     const months = [];
     const now = new Date();
-    
+
     // Generate last 6 months
     for (let i = 5; i >= 0; i--) {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
@@ -37,7 +37,7 @@ const ComparisonBarChart = () => {
     transactions.forEach((tx) => {
       const txDate = new Date(tx.date);
       const match = months.find(
-        (m) => m.month === txDate.getMonth() && m.year === txDate.getFullYear()
+        (m) => m.month === txDate.getMonth() && m.year === txDate.getFullYear(),
       );
       if (match) {
         if (tx.type === "income") match.income += tx.amount;
@@ -147,7 +147,7 @@ const ComparisonBarChart = () => {
   };
 
   return (
-    <div className="bg-background rounded-3xl p-6 border border-border-color shadow-sm h-full">
+    <div className="bg-background rounded-3xl p-6 h-full">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h5 className="text-xl font-bold">Monthly Comparison</h5>

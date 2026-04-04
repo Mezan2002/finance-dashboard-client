@@ -43,7 +43,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
           <div className="p-4 pt-4">
             {/* search bar */}
-            <div className="border border-border-color flex items-center px-3 py-2 rounded-xl gap-2 shadow-sm bg-app-inner-bg/30">
+            <div className="border border-border-color flex items-center px-3 py-2 rounded-lg shadow-inner gap-2 bg-app-inner-bg/30">
               <Search className="size-4 text-text-light" />
               <input
                 type="text"

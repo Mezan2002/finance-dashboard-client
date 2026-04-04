@@ -32,7 +32,7 @@ const PrimaryGoals = () => {
       type: "gradient",
       gradient: {
         shadeIntensity: 1,
-        opacityFrom: 0.45,
+        opacityFrom: 0.35,
         opacityTo: 0.05,
         stops: [0, 100],
       },
@@ -44,17 +44,23 @@ const PrimaryGoals = () => {
   };
 
   return (
-    <div className="bg-background rounded-2xl p-4 col-span-3 relative overflow-hidden">
-      <h5 className="text-xl font-semibold">Goals</h5>
-      <p className="text-sm text-text-base">Manage your primary goals</p>
-
-      <div className="mt-6 text-center">
-        <span className="text-xs font-medium text-text-base">Total Goal</span>
-        <p className="text-3xl font-semibold">$32,675.25</p>
+    <div className="bg-background rounded-3xl p-6 lg:col-span-3 md:col-span-6 col-span-12 relative overflow-hidden min-h-[240px]">
+      <div>
+        <h5 className="text-xl font-bold">Goals</h5>
+        <p className="text-xs text-text-light font-medium tracking-wide uppercase opacity-70">
+          Primary Savings Targets
+        </p>
       </div>
 
-      <div className="-mx-4 absolute bottom-0 w-full">
-        <Chart options={options} series={series} type="area" height={140} />
+      <div className="mt-6">
+        <span className="text-[10px] uppercase tracking-[0.15em] text-text-light">
+          Current Progress
+        </span>
+        <p className="text-3xl font-bold mt-1">$32,675.25</p>
+      </div>
+
+      <div className="absolute -bottom-6 -left-2 -right-2 w-[110%]">
+        <Chart options={options} series={series} type="area" height={180} />
       </div>
     </div>
   );

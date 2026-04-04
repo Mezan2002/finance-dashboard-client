@@ -22,9 +22,9 @@ const Header = ({ onMenuClick }) => {
   const { role, setRole } = useRole();
 
   return (
-    <div className="w-full py-3 flex items-center justify-between px-4">
+    <div className="w-full py-4 flex items-center justify-between px-4 md:px-6">
       {/* left section */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <Button
           variant="outline"
           className="p-2! lg:hidden"
@@ -49,7 +49,9 @@ const Header = ({ onMenuClick }) => {
             <ChevronRight className="size-4 text-text-base" />
           </Button>
         </div>
-        <Breadcrumb />
+        <div className="hidden md:block">
+          <Breadcrumb />
+        </div>
       </div>
 
       {/* right section */}

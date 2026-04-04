@@ -17,25 +17,36 @@ const TotalBalanceCard = () => {
   const totalBalance = transactions.reduce((acc, tx) => acc + tx.amount, 0);
 
   return (
-    <div className="bg-background rounded-2xl p-4 lg:col-span-4 col-span-12">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="size-10 rounded-full bg-app-inner-bg flex items-center justify-center">
-            <Wallet className="size-5 text-text-base" />
-          </div>
-          <h5 className="text-xl font-medium text-text-base">Total Balance</h5>
-        </div>
-        <Button className="rounded-full! gap-1! px-2! py-1!" variant="outline">
-          <DollarSign className="size-4" /> <span className="text-sm">USD</span>
-          <ChevronDown className="size-4" />
-        </Button>
-      </div>
-
+    <div className="bg-background rounded-2xl p-4 lg:col-span-4 col-span-12 flex flex-col justify-between">
       <div>
-        <p className="text-4xl font-semibold mt-2">
-          ${totalBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-        </p>
-        <p className="text-sm text-text-base">Available Balance</p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="size-10 rounded-full bg-app-inner-bg flex items-center justify-center">
+              <Wallet className="size-5 text-text-base" />
+            </div>
+            <h5 className="text-xl font-medium text-text-base">
+              Total Balance
+            </h5>
+          </div>
+          <Button
+            className="rounded-full! gap-1! px-2! py-1!"
+            variant="outline"
+          >
+            <DollarSign className="size-4" />{" "}
+            <span className="text-sm">USD</span>
+            <ChevronDown className="size-4" />
+          </Button>
+        </div>
+
+        <div>
+          <p className="text-4xl font-semibold mt-2">
+            $
+            {totalBalance.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+            })}
+          </p>
+          <p className="text-sm text-text-base">Available Balance</p>
+        </div>
       </div>
 
       <div className="mt-5 bg-app-inner-bg p-3 rounded-xl space-y-12">

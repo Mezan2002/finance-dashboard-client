@@ -1,6 +1,12 @@
 "use client";
 import { useTransactions } from "@/providers/TransactionProvider";
-import { AlertCircle, CheckCircle2, Info, PiggyBank, TrendingUp } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  Info,
+  PiggyBank,
+  TrendingUp,
+} from "lucide-react";
 import { useMemo } from "react";
 
 const Observations = () => {
@@ -11,20 +17,33 @@ const Observations = () => {
     const currentMonth = now.getMonth();
     const currentYear = now.getFullYear();
     const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    
-    const currentMonthTxs = transactions.filter(tx => {
+
+    const currentMonthTxs = transactions.filter((tx) => {
       const d = new Date(tx.date);
       return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
     });
 
-    const lastMonthTxs = transactions.filter(tx => {
+    const lastMonthTxs = transactions.filter((tx) => {
       const d = new Date(tx.date);
-      return d.getMonth() === lastMonthDate.getMonth() && d.getFullYear() === lastMonthDate.getFullYear();
+      return (
+        d.getMonth() === lastMonthDate.getMonth() &&
+        d.getFullYear() === lastMonthDate.getFullYear()
+      );
     });
 
-    const currentIncome = currentMonthTxs.filter(t => t.type === "income").reduce((a, b) => a + b.amount, 0);
-    const currentExpense = Math.abs(currentMonthTxs.filter(t => t.type === "expense").reduce((a, b) => a + b.amount, 0));
-    const lastExpense = Math.abs(lastMonthTxs.filter(t => t.type === "expense").reduce((a, b) => a + b.amount, 0));
+    const currentIncome = currentMonthTxs
+      .filter((t) => t.type === "income")
+      .reduce((a, b) => a + b.amount, 0);
+    const currentExpense = Math.abs(
+      currentMonthTxs
+        .filter((t) => t.type === "expense")
+        .reduce((a, b) => a + b.amount, 0),
+    );
+    const lastExpense = Math.abs(
+      lastMonthTxs
+        .filter((t) => t.type === "expense")
+        .reduce((a, b) => a + b.amount, 0),
+    );
 
     const obs = [];
 
@@ -78,7 +97,7 @@ const Observations = () => {
   }, [transactions]);
 
   return (
-    <div className="lg:col-span-12 col-span-12 bg-background border border-border-color rounded-3xl p-6 shadow-sm">
+    <div className="lg:col-span-12 col-span-12 bg-background rounded-3xl p-6">
       <div className="flex items-center gap-2 mb-6">
         <Info className="size-5 text-indigo-500" />
         <h5 className="text-xl font-bold text-foreground">
@@ -89,20 +108,30 @@ const Observations = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {observations.map((obs, idx) => {
           const Icon = obs.icon;
-          const colorClass = 
-            obs.color === "emerald" ? "text-emerald-500 bg-emerald-500/10 border-emerald-500/20" :
-            obs.color === "rose" ? "text-rose-500 bg-rose-500/10 border-rose-500/20" :
-            obs.color === "amber" ? "text-amber-500 bg-amber-500/10 border-amber-500/20" :
-            "text-indigo-500 bg-indigo-500/10 border-indigo-500/20";
+          const colorClass =
+            obs.color === "emerald"
+              ? "text-emerald-500 bg-emerald-500/10 border-emerald-500/20"
+              : obs.color === "rose"
+                ? "text-rose-500 bg-rose-500/10 border-rose-500/20"
+                : obs.color === "amber"
+                  ? "text-amber-500 bg-amber-500/10 border-amber-500/20"
+                  : "text-indigo-500 bg-indigo-500/10 border-indigo-500/20";
 
           return (
-            <div key={idx} className="flex items-start gap-4 p-4 bg-app-inner-bg/50 rounded-2xl border border-border-color hover:bg-app-inner-bg transition-all cursor-pointer">
-              <div className={`size-10 rounded-full flex items-center justify-center border shrink-0 ${colorClass}`}>
+            <div
+              key={idx}
+              className="flex items-start gap-4 p-4 bg-app-inner-bg/50 rounded-2xl border border-border-color hover:bg-app-inner-bg transition-all cursor-pointer"
+            >
+              <div
+                className={`size-10 rounded-full flex items-center justify-center border shrink-0 ${colorClass}`}
+              >
                 <Icon className="size-5" />
               </div>
               <div>
                 <p className="text-sm font-bold text-foreground">{obs.title}</p>
-                <p className="text-xs text-text-base leading-relaxed mt-1">{obs.description}</p>
+                <p className="text-xs text-text-base leading-relaxed mt-1">
+                  {obs.description}
+                </p>
               </div>
             </div>
           );

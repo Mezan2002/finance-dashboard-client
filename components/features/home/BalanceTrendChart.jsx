@@ -45,7 +45,9 @@ const BalanceTrendChart = () => {
       return acc;
     }, {});
 
-    const sortedDates = Object.keys(dailyTotals).sort((a, b) => new Date(a) - new Date(b));
+    const sortedDates = Object.keys(dailyTotals).sort(
+      (a, b) => new Date(a) - new Date(b),
+    );
 
     let runningBalance = 0;
     const series = [];
@@ -169,7 +171,7 @@ const BalanceTrendChart = () => {
   };
 
   return (
-    <div className="bg-background rounded-2xl p-6 lg:col-span-8 col-span-12 flex flex-col border border-border-color shadow-sm">
+    <div className="bg-background rounded-2xl p-6 lg:col-span-8 col-span-12 flex flex-col">
       <div className="flex items-start justify-between mb-2">
         <div>
           <h5 className="text-xl font-semibold">Balance Trend</h5>

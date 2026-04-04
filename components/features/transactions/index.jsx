@@ -40,9 +40,12 @@ const Transactions = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedTx, setSelectedTx] = useState(null);
-  
+
   // Sorting state
-  const [sortConfig, setSortConfig] = useState({ key: "date", direction: "desc" });
+  const [sortConfig, setSortConfig] = useState({
+    key: "date",
+    direction: "desc",
+  });
 
   const handleSort = (key) => {
     setSortConfig((prev) => ({
@@ -102,7 +105,9 @@ const Transactions = () => {
         return sortConfig.direction === "asc" ? dA - dB : dB - dA;
       }
       if (sortConfig.key === "amount") {
-        return sortConfig.direction === "asc" ? a.amount - b.amount : b.amount - a.amount;
+        return sortConfig.direction === "asc"
+          ? a.amount - b.amount
+          : b.amount - a.amount;
       }
       return 0;
     });
@@ -148,8 +153,7 @@ const Transactions = () => {
 
       <div className="space-y-6">
         {/* Stable Full-Width Filter & Export Bar */}
-        <div className="bg-background p-6 rounded-2xl border border-border-color shadow-sm w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 items-end">
-          
+        <div className="bg-background p-6 rounded-2xl w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 items-end">
           {/* Filters */}
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold uppercase tracking-wider text-text-light ml-1">
@@ -239,7 +243,7 @@ const Transactions = () => {
         </div>
 
         {/* Transactions Table */}
-        <div className="bg-background rounded-2xl border border-border-color overflow-hidden shadow-sm relative">
+        <div className="bg-background rounded-2xl overflow-hidden border border-border-color relative">
           {/* Mutating Overlay */}
           {isMutating && (
             <div className="absolute inset-0 bg-background/40 backdrop-blur-[1px] z-10 flex items-center justify-center animate-fade-in">
@@ -257,27 +261,35 @@ const Transactions = () => {
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-text-light">
                     Transaction
                   </th>
-                  <th 
+                  <th
                     className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-text-light cursor-pointer hover:text-foreground transition-colors"
                     onClick={() => handleSort("date")}
                   >
                     <div className="flex items-center gap-1">
                       Date
                       {sortConfig.key === "date" ? (
-                        sortConfig.direction === "asc" ? <ChevronUp className="size-3" /> : <ChevronDown className="size-3" />
+                        sortConfig.direction === "asc" ? (
+                          <ChevronUp className="size-3" />
+                        ) : (
+                          <ChevronDown className="size-3" />
+                        )
                       ) : (
                         <ArrowUpDown className="size-3 opacity-30" />
                       )}
                     </div>
                   </th>
-                  <th 
+                  <th
                     className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-text-light text-right cursor-pointer hover:text-foreground transition-colors"
                     onClick={() => handleSort("amount")}
                   >
                     <div className="flex items-center justify-end gap-1">
                       Amount
                       {sortConfig.key === "amount" ? (
-                        sortConfig.direction === "asc" ? <ChevronUp className="size-3" /> : <ChevronDown className="size-3" />
+                        sortConfig.direction === "asc" ? (
+                          <ChevronUp className="size-3" />
+                        ) : (
+                          <ChevronDown className="size-3" />
+                        )
                       ) : (
                         <ArrowUpDown className="size-3 opacity-30" />
                       )}
